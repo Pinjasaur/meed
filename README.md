@@ -10,7 +10,7 @@ Get Medium feeds as JSON. Also check out [Ghosts/medium-feed][mf] because it may
 
 ## Why
 
-Because @Ghosts was writing [medium-feed][mf]. ¯\\\_(ツ)_/¯
+Because [@Ghosts](https://github.com/Ghosts) was writing [medium-feed][mf]. ¯\\\_(ツ)_/¯
 
 ## How
 
