@@ -1,0 +1,10 @@
+{
+  "name": "meed",
+  "version": "1.0.0",
+  "description": "Get Medium feeds as JSON.",
+  "main": "src/meed.js",
+  "repository": "git@github.com:Pinjasaur/meed.git",
+  "author": "Paul Esch-Laurent <p@uly.io>",
+  "license": "MIT",
+  "private": true
+}
