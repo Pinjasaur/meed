@@ -1,7 +1,7 @@
 const RSSParser = require("rss-parser")
 
 const BASE  = "https://medium.com/feed"
-const PROXY = "https://cors.io/?"
+const PROXY = "https://cors-anywhere.herokuapp.com/"
 
 const parse  = (rss) => new RSSParser().parseString(rss)
 const format = (json, type) => {
@@ -46,6 +46,7 @@ const get = function (url, type) {
 export default class Meed {
 
   constructor(options = {}) {
+    // TODO: pass in proxy URL as a string, not a boolean flag
     this.proxy = options.proxy || false
     // TODO: check for provided `fetch`, error otherwise
     // If available, use the global `fetch` definition
