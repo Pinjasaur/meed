@@ -8,5 +8,16 @@
 </head>
 <body>
   <script src="../dist/meed.js"></script>
+  <script>
+    (async () => {
+      const feed = new Meed({ proxy: true })
+      try {
+        const user = await feed.user("caden")
+        console.log(user)
+      } catch (e) {
+        console.log(e)
+      }
+    })()
+  </script>
 </body>
 </html>

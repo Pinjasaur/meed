@@ -11,7 +11,7 @@
     "watch": "webpack --watch"
   },
   "dependencies": {
-    "xml2js": "^0.4.19"
+    "rss-parser": "^3.7.0"
   },
   "devDependencies": {
     "await-to-js": "^2.1.1",
