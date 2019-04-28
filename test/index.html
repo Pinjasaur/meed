@@ -12,7 +12,7 @@
     ;(async () => {
       const feed = new Meed({ proxy: true })
       try {
-        const user = await feed.user("caden")
+        const user = await feed.user("DOES_NOT_EXIST")
         console.log(user)
       } catch (e) {
         console.log(e)

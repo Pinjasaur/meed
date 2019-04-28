@@ -1,14 +1,7 @@
 const RSSParser = require("rss-parser")
 
-// const parse  = promisify(parseString)
-// const format = (json, type) => {
-//   return json.rss.channel[0].item.map(item => {
-//     return {
-//       title: item.title[0] || "",
-//       link:  item.link[0] || "",
-//     }
-//   })
-// }
+const BASE  = "https://medium.com/feed"
+const PROXY = "https://cors.io/?"
 
 const parse  = (rss) => new RSSParser().parseString(rss)
 const format = (json, type) => {
@@ -30,35 +23,25 @@ const format = (json, type) => {
     }
   })
 }
+const check = (res) => {
+  return new Promise((resolve, reject) => {
+    if (!res.ok)
+      throw new Error("Response not OK")
+
+    if (!res.headers.get("Content-Type").toLowerCase().includes("text/xml"))
+      throw new Error("Response not XML")
+
+    resolve(res)
+  })
+}
 // Note the non-arrow to avoid lexical binding of `this` (it gets .call()'d)
-const get = async function (url, type) {
+const get = function (url, type) {
   return this.fetch(url)
+    .then(res  => check(res))
     .then(res  => res.text())
     .then(rss  => parse(rss))
     .then(json => format(json, type))
-    .catch(err => err)
 }
-
-
-// const $      = (el, tag) => el.getElementsByTagName(tag)[0]
-// const $$     = (el, tag) => el.getElementsByTagName(tag)
-// const parse  = (xml) => new DOMParser().parseFromString(xml, "text/xml")
-// const format = (xml, type) => {
-//   const ctag = (type === "user") ? "content:encoded" : "description"
-//   return Array.from($$(xml, "item")).map(item => {
-//     return {
-//       title: $(item, "title").childNodes[0].nodeValue,
-//       link: $(item, "link").childNodes[0].nodeValue,
-//       date: new Date($(item, "pubDate").childNodes[0].nodeValue),
-//       author: $(item, "dc:creator").childNodes[0].nodeValue,
-//       content: $(item, ctag).childNodes[0].nodeValue,
-//       categories: $$(item, "category").map(c => c.textContent)
-//     }
-//   })
-// }
-
-const BASE  = "https://medium.com/feed"
-const PROXY = "https://cors.io/?"
 
 export default class Meed {
 
@@ -71,9 +54,8 @@ export default class Meed {
 
   async user (user) {
 
-    if (!user) {
+    if (!user)
       throw new Error("User required")
-    }
 
     const url = (this.proxy) ? `${PROXY}${BASE}/@${user}` : `${BASE}/@${user}`
     return get.call(this, url, "user")
@@ -81,9 +63,8 @@ export default class Meed {
 
   async topic (topic) {
 
-    if (!topic) {
+    if (!topic)
       throw new Error("Topic required")
-    }
 
     const url = (this.proxy) ? `${PROXY}${BASE}/topic/${topic}` : `${BASE}/topic/${topic}`
     return get.call(this, url, "topic")
@@ -91,9 +72,8 @@ export default class Meed {
 
   async tag (tag) {
 
-    if (!tag) {
+    if (!tag)
       throw new Error("Tag required")
-    }
 
     const url = (this.proxy) ? `${PROXY}${BASE}/tag/${tag}` : `${BASE}/tag/${tag}`
     return get.call(this, url, "tag")

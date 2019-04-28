@@ -8,13 +8,16 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "test": "mocha \"./test/*.spec.js\" "
   },
   "dependencies": {
     "rss-parser": "^3.7.0"
   },
   "devDependencies": {
     "await-to-js": "^2.1.1",
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4",
     "node-fetch": "^2.4.1",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2"
