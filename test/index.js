@@ -9,3 +9,15 @@ const feed = new Meed({ fetch })
   if (err) console.log(err)
   console.log(user)
 })()
+
+;(async () => {
+  const [err, topic] = await to(feed.topic("technology"))
+  if (err) console.log(err)
+  console.log(topic)
+})()
+
+;(async () => {
+  const [err, tag] = await to(feed.tag("javascript"))
+  if (err) console.log(err)
+  console.log(tag)
+})()

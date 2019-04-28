@@ -23,6 +23,7 @@ const format = (json, type) => {
       title: item.title,                                                        // String
       // In RSS-land, the <dc:creator> tag is for the author's name while the
       // <author> tag is for the author's email address _and_ name. Wild, eh?
+      // Sources: https://uly.io/as, https://uly.io/at
       author: item.creator,                                                     // String
       content: item[ctag],                                                      // String (HTML)
       categories: item.categories || []                                         // Array[String]
@@ -56,7 +57,7 @@ const get = async function (url, type) {
 //   })
 // }
 
-const BASE = "https://medium.com/feed"
+const BASE  = "https://medium.com/feed"
 const PROXY = "https://cors.io/?"
 
 export default class Meed {
@@ -76,5 +77,25 @@ export default class Meed {
 
     const url = (this.proxy) ? `${PROXY}${BASE}/@${user}` : `${BASE}/@${user}`
     return get.call(this, url, "user")
+  }
+
+  async topic (topic) {
+
+    if (!topic) {
+      throw new Error("Topic required")
+    }
+
+    const url = (this.proxy) ? `${PROXY}${BASE}/topic/${topic}` : `${BASE}/topic/${topic}`
+    return get.call(this, url, "topic")
+  }
+
+  async tag (tag) {
+
+    if (!tag) {
+      throw new Error("Tag required")
+    }
+
+    const url = (this.proxy) ? `${PROXY}${BASE}/tag/${tag}` : `${BASE}/tag/${tag}`
+    return get.call(this, url, "tag")
   }
 }

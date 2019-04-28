@@ -9,11 +9,31 @@
 <body>
   <script src="../dist/meed.js"></script>
   <script>
-    (async () => {
+    ;(async () => {
       const feed = new Meed({ proxy: true })
       try {
         const user = await feed.user("caden")
         console.log(user)
+      } catch (e) {
+        console.log(e)
+      }
+    })()
+
+    ;(async () => {
+      const feed = new Meed({ proxy: true })
+      try {
+        const topic = await feed.topic("technology")
+        console.log(topic)
+      } catch (e) {
+        console.log(e)
+      }
+    })()
+
+    ;(async () => {
+      const feed = new Meed({ proxy: true })
+      try {
+        const tag = await feed.tag("javascript")
+        console.log(tag)
       } catch (e) {
         console.log(e)
       }
