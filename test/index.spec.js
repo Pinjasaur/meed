@@ -1,7 +1,7 @@
 const { expect } = require("chai")
-const fetch = require("node-fetch")
-const to    = require("await-to-js").default
-const Meed  = require("../dist/meed")
+const fetch      = require("node-fetch")
+const to         = require("await-to-js").default
+const Meed       = require("../dist/meed")
 
 const feed = new Meed({ fetch })
 
@@ -27,12 +27,46 @@ describe("Meed", () => {
 
       const [err, user] = await to(feed.user("caden"))
       expect(typeof user).to.equal("object")
+      expect(user.length).to.be.greaterThan(0)
     })
 
     it("rejects against an unknown user", async () => {
 
-      const [err, user] = await to(feed.user("DOES_NOT_EXIST"))
+      const [err, user] = await to(feed.user("USER_DOES_NOT_EXIST"))
       expect(err.message).to.equal("Response not OK")
+    })
+  })
+
+  describe("#topic()", () => {
+
+    it("resolves against a known topic", async () => {
+
+      const [err, topic] = await to(feed.topic("technology"))
+      expect(typeof topic).to.equal("object")
+      expect(topic.length).to.be.greaterThan(0)
+    })
+
+    it("rejects against an unknown topic", async () => {
+
+      const [err, topic] = await to(feed.topic("TOPIC_DOES_NOT_EXIST"))
+      expect(err.message).to.equal("Response not OK")
+    })
+  })
+
+  describe("#tag()", () => {
+
+    it("resolves against a known tag", async () => {
+
+      const [err, tag] = await to(feed.tag("javascript"))
+      expect(typeof tag).to.equal("object")
+      expect(tag.length).to.be.greaterThan(0)
+    })
+
+    it("returns no items against an unknown tag", async () => {
+
+      const [err, tag] = await to(feed.tag("TAG_DOES_NOT_EXIST"))
+      expect(typeof tag).to.equal("object")
+      expect(tag.length).to.be.equal(0)
     })
   })
 })
