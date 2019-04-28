@@ -52,7 +52,7 @@ export default class Meed {
 
   async user (user) {
 
-    if (!user)
+    if (!(typeof user === "string" && user.length > 0))
       throw new Error("User required")
 
     const url = (this.proxy) ? `${PROXY}${BASE}/@${user}` : `${BASE}/@${user}`
@@ -61,7 +61,7 @@ export default class Meed {
 
   async topic (topic) {
 
-    if (!topic)
+    if (!(typeof topic === "string" && topic.length > 0))
       throw new Error("Topic required")
 
     const url = (this.proxy) ? `${PROXY}${BASE}/topic/${topic}` : `${BASE}/topic/${topic}`
@@ -70,7 +70,7 @@ export default class Meed {
 
   async tag (tag) {
 
-    if (!tag)
+    if (!(typeof tag === "string" && tag.length > 0))
       throw new Error("Tag required")
 
     const url = (this.proxy) ? `${PROXY}${BASE}/tag/${tag}` : `${BASE}/tag/${tag}`

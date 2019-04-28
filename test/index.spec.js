@@ -23,6 +23,24 @@ describe("Meed", () => {
 
   describe("#user()", () => {
 
+    it("throws errors if no argument", async () => {
+
+      const [err, user] = await to(feed.user())
+      expect(err.message).to.equal("User required")
+    })
+
+    it("throws errors if argument is empty string", async () => {
+
+      const [err, user] = await to(feed.user(""))
+      expect(err.message).to.equal("User required")
+    })
+
+    it("throws errors if argument is not string", async () => {
+
+      const [err, user] = await to(feed.user(123))
+      expect(err.message).to.equal("User required")
+    })
+
     it("resolves against a known user", async () => {
 
       const [err, user] = await to(feed.user("caden"))
@@ -39,6 +57,24 @@ describe("Meed", () => {
 
   describe("#topic()", () => {
 
+    it("throws errors if no argument", async () => {
+
+      const [err, topic] = await to(feed.topic())
+      expect(err.message).to.equal("Topic required")
+    })
+
+    it("throws errors if argument is empty string", async () => {
+
+      const [err, topic] = await to(feed.topic(""))
+      expect(err.message).to.equal("Topic required")
+    })
+
+    it("throws errors if argument is not string", async () => {
+
+      const [err, topic] = await to(feed.topic(123))
+      expect(err.message).to.equal("Topic required")
+    })
+
     it("resolves against a known topic", async () => {
 
       const [err, topic] = await to(feed.topic("technology"))
@@ -54,6 +90,24 @@ describe("Meed", () => {
   })
 
   describe("#tag()", () => {
+
+    it("throws errors if no argument", async () => {
+
+      const [err, tag] = await to(feed.tag())
+      expect(err.message).to.equal("Tag required")
+    })
+
+    it("throws errors if argument is empty string", async () => {
+
+      const [err, tag] = await to(feed.tag(""))
+      expect(err.message).to.equal("Tag required")
+    })
+
+    it("throws errors if argument is not string", async () => {
+
+      const [err, tag] = await to(feed.tag(123))
+      expect(err.message).to.equal("Tag required")
+    })
 
     it("resolves against a known tag", async () => {
 

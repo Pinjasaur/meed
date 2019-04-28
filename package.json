@@ -9,7 +9,7 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
-    "test": "mocha \"./test/*.spec.js\" "
+    "test": "mocha \"./test/*.spec.js\""
   },
   "dependencies": {
     "rss-parser": "^3.7.0"
