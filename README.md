@@ -2,7 +2,7 @@
 
 [![Travis](https://img.shields.io/travis/Pinjasaur/meed.svg)](https://travis-ci.org/Pinjasaur/meed)
 
-Minimal & modern JavaScript library for getting Medium feeds as JSON.
+JavaScript library for getting Medium feeds (user, topic, or tag) as JSON.
 
 ## What
 

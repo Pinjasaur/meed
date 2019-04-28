@@ -1,9 +1,1 @@
-class Meed {
-
-  constructor (options = {}) {
-
-  }
-
-}
-
-export default Meed
+module.exports = require("./meed").default
