@@ -3,6 +3,15 @@ const RSSParser = require("rss-parser")
 const BASE  = "https://medium.com/feed"
 const PROXY = "https://cors-anywhere.herokuapp.com/"
 
+const check = (res) => {
+  if (!res.ok)
+    throw new Error("Response not OK")
+
+  if (!res.headers.get("Content-Type").toLowerCase().includes("text/xml"))
+    throw new Error("Response not XML")
+
+  return res.text()
+}
 const parse  = (rss) => new RSSParser().parseString(rss)
 const format = (json, type) => {
   const ctag = (type === "user") ? "content:encoded" : "description"
@@ -23,22 +32,10 @@ const format = (json, type) => {
     }
   })
 }
-const check = (res) => {
-  return new Promise((resolve, reject) => {
-    if (!res.ok)
-      throw new Error("Response not OK")
-
-    if (!res.headers.get("Content-Type").toLowerCase().includes("text/xml"))
-      throw new Error("Response not XML")
-
-    resolve(res)
-  })
-}
 // Note the non-arrow to avoid lexical binding of `this` (it gets .call()'d)
 const get = function (url, type) {
   return this.fetch(url)
     .then(res  => check(res))
-    .then(res  => res.text())
     .then(rss  => parse(rss))
     .then(json => format(json, type))
 }
