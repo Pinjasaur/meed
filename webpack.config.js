@@ -16,6 +16,20 @@ module.exports = {
     // name the AMD module of the UMD build (anon is default)
     umdNamedDefine: true
   },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["modern-browsers"]
+          }
+        }
+      }
+    ]
+  },
   plugins: [
     new webpack.BannerPlugin({
       // banner: `${pkg.name} v${pkg.version} | ${pkg.license} License | ${pkg.homepage}`

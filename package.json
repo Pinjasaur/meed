@@ -9,6 +9,7 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack",
+    "build-debug": "webpack --progress --colors --profile --display-modules --display-reasons --display-error-details",
     "watch": "webpack --watch",
     "test": "mocha \"./test/*.spec.js\""
   },
@@ -16,7 +17,10 @@
     "rss-parser": "^3.7.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.4",
     "await-to-js": "^2.1.1",
+    "babel-loader": "^8.0.5",
+    "babel-preset-modern-browsers": "^14.0.0",
     "chai": "^4.2.0",
     "mocha": "^6.1.4",
     "node-fetch": "^2.4.1",
