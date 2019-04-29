@@ -1,3 +1,4 @@
+const webpack = require("webpack")
 const path = require("path");
 const pkg  = require("./package.json");
 
@@ -14,5 +15,16 @@ module.exports = {
     globalObject: "this",
     // name the AMD module of the UMD build (anon is default)
     umdNamedDefine: true
-  }
+  },
+  plugins: [
+    new webpack.BannerPlugin({
+      // banner: `${pkg.name} v${pkg.version} | ${pkg.license} License | ${pkg.homepage}`
+      banner: [
+        `${pkg.name} v${pkg.version} - ${pkg.description}`,
+        `On the web at ${pkg.homepage}`,
+        `Written by ${pkg.author}`,
+        `Licensed under ${pkg.license}`,
+      ].join("\n")
+    })
+  ]
 };
