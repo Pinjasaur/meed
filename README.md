@@ -1,4 +1,6 @@
-# meed
+<h1 align="center">
+  <img src="/.github/meed.svg" alt="Meed" width="450">
+</h1>
 
 [![Travis](https://img.shields.io/travis/Pinjasaur/meed.svg)](https://travis-ci.org/Pinjasaur/meed)
 
