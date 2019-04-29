@@ -51,7 +51,7 @@ describe("Meed", () => {
 
     it("resolves against a known user", async () => {
 
-      const [err, user] = await to(feed.user("caden"))
+      const [err, user] = await to(feed.user("Medium"))
       expect(typeof user).to.equal("object")
       expect(user.length).to.be.greaterThan(0)
     })

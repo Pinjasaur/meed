@@ -1,7 +1,21 @@
+/**
+ * NPM libs.
+ */
 const RSSParser = require("rss-parser")
 
-const BASE  = "https://medium.com/feed"
+/**
+ * Constants.
+ */
+const BASE = "https://medium.com/feed"
 
+/**
+ * Functions.
+ */
+
+/**
+ * Check a response before passing it off.
+ * @param {Response} res A Response from a `fetch` call.
+ */
 const check = (res) => {
   if (!res.ok)
     throw new Error("Response not OK")
@@ -11,9 +25,20 @@ const check = (res) => {
 
   return res.text()
 }
+
+/**
+ * Parse a string as RSS.
+ * @param {String} rss The RSS, as a string.
+ */
 const parse  = (rss) => new RSSParser().parseString(rss)
+
+/**
+ * Format the JSON feed.
+ * @param {Object} json The JSON, as an object.
+ * @param {String} type The type of feed: user|topic|tags.
+ */
 const format = (json, type) => {
-  const ctag = (type === "user") ? "content:encoded" : "description"
+  const ctag = (["user"].includes(type)) ? "content:encoded" : "description"
   return json.items.map(item => {
     return {
       date: new Date(item.isoDate),                                             // Date
@@ -31,7 +56,13 @@ const format = (json, type) => {
     }
   })
 }
-// Note the non-arrow to avoid lexical binding of `this` (it gets .call()'d)
+
+/**
+ * Make a request for an RSS feed.
+ * Note the non-arrow to avoid lexical binding of `this` (it gets .call()'d)
+ * @param {String} url  The URL to request.
+ * @param {String} type The type of feed: user|topic|tags.
+ */
 const get = function (url, type) {
   return this.fetch(url)
     .then(res  => check(res))
@@ -39,8 +70,20 @@ const get = function (url, type) {
     .then(json => format(json, type))
 }
 
+/**
+ * Docs: https://help.medium.com/hc/en-us/articles/214874118-RSS-feeds
+ * TODO: Meed#topics() all topics from: medium.com/topics
+ * TODO: Meed#publication() w/ support for _optional_ tag
+ */
+/**
+ * Meed itself.
+ */
 export default class Meed {
 
+  /**
+   * Kick-off a new instance of Meed.
+   * @param {Object} options Any options to configure Meed.
+   */
   constructor(options = {}) {
 
     this.proxy = options.proxy || false
@@ -55,6 +98,10 @@ export default class Meed {
       throw new Error("Fetch must be a function")
   }
 
+  /**
+   * Get a user's feed.
+   * @param {String} user The username.
+   */
   async user (user) {
 
     if (!(typeof user === "string" && user.length > 0))
@@ -64,6 +111,10 @@ export default class Meed {
     return get.call(this, url, "user")
   }
 
+  /**
+   * Get the feed for a topic.
+   * @param {String} topic The topic (medium.com/topics).
+   */
   async topic (topic) {
 
     if (!(typeof topic === "string" && topic.length > 0))
@@ -73,6 +124,10 @@ export default class Meed {
     return get.call(this, url, "topic")
   }
 
+  /**
+   * Get the feed for a tag.
+   * @param {String} tag The tag.
+   */
   async tag (tag) {
 
     if (!(typeof tag === "string" && tag.length > 0))
