@@ -9,33 +9,35 @@ describe("Meed", () => {
 
   it("exports a function", () => {
 
-    const result   = typeof Meed
-    const expected = "function"
-    expect(result).to.equal(expected)
+    expect(typeof Meed).to.equal("function")
   })
 
   it("exports an object when instantiated", () => {
 
-    const result   = typeof new Meed()
-    const expected = "object"
-    expect(result).to.equal(expected)
+    expect(typeof new Meed()).to.equal("object")
+  })
+
+  it("errors if non-string `proxy`", () => {
+
+    const fn = function () { return new Meed({ proxy: true }) }
+    expect(fn).to.throw(Error)
   })
 
   describe("#user()", () => {
 
-    it("throws errors if no argument", async () => {
+    it("errors if no argument", async () => {
 
       const [err, user] = await to(feed.user())
       expect(err.message).to.equal("User required")
     })
 
-    it("throws errors if argument is empty string", async () => {
+    it("errors if argument is empty string", async () => {
 
       const [err, user] = await to(feed.user(""))
       expect(err.message).to.equal("User required")
     })
 
-    it("throws errors if argument is not string", async () => {
+    it("errors if argument is not string", async () => {
 
       const [err, user] = await to(feed.user(123))
       expect(err.message).to.equal("User required")
@@ -57,19 +59,19 @@ describe("Meed", () => {
 
   describe("#topic()", () => {
 
-    it("throws errors if no argument", async () => {
+    it("errors if no argument", async () => {
 
       const [err, topic] = await to(feed.topic())
       expect(err.message).to.equal("Topic required")
     })
 
-    it("throws errors if argument is empty string", async () => {
+    it("errors if argument is empty string", async () => {
 
       const [err, topic] = await to(feed.topic(""))
       expect(err.message).to.equal("Topic required")
     })
 
-    it("throws errors if argument is not string", async () => {
+    it("errors if argument is not string", async () => {
 
       const [err, topic] = await to(feed.topic(123))
       expect(err.message).to.equal("Topic required")
@@ -91,19 +93,19 @@ describe("Meed", () => {
 
   describe("#tag()", () => {
 
-    it("throws errors if no argument", async () => {
+    it("errors if no argument", async () => {
 
       const [err, tag] = await to(feed.tag())
       expect(err.message).to.equal("Tag required")
     })
 
-    it("throws errors if argument is empty string", async () => {
+    it("errors if argument is empty string", async () => {
 
       const [err, tag] = await to(feed.tag(""))
       expect(err.message).to.equal("Tag required")
     })
 
-    it("throws errors if argument is not string", async () => {
+    it("errors if argument is not string", async () => {
 
       const [err, tag] = await to(feed.tag(123))
       expect(err.message).to.equal("Tag required")

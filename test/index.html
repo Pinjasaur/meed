@@ -9,8 +9,9 @@
 <body>
   <script src="../dist/meed.js"></script>
   <script>
+    const PROXY = "https://cors-anywhere.herokuapp.com/"
     ;(async () => {
-      const feed = new Meed({ proxy: true })
+      const feed = new Meed({ proxy: PROXY })
       try {
         const user = await feed.user("DOES_NOT_EXIST")
         console.log(user)
@@ -20,7 +21,7 @@
     })()
 
     ;(async () => {
-      const feed = new Meed({ proxy: true })
+      const feed = new Meed({ proxy: PROXY })
       try {
         const topic = await feed.topic("technology")
         console.log(topic)
@@ -30,7 +31,7 @@
     })()
 
     ;(async () => {
-      const feed = new Meed({ proxy: true })
+      const feed = new Meed({ proxy: PROXY })
       try {
         const tag = await feed.tag("javascript")
         console.log(tag)

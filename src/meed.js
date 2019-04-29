@@ -1,7 +1,6 @@
 const RSSParser = require("rss-parser")
 
 const BASE  = "https://medium.com/feed"
-const PROXY = "https://cors-anywhere.herokuapp.com/"
 
 const check = (res) => {
   if (!res.ok)
@@ -43,8 +42,12 @@ const get = function (url, type) {
 export default class Meed {
 
   constructor(options = {}) {
-    // TODO: pass in proxy URL as a string, not a boolean flag
+
     this.proxy = options.proxy || false
+
+    if (this.proxy !== false && typeof this.proxy !== "string")
+      throw new Error("Proxy must be a string")
+
     // TODO: check for provided `fetch`, error otherwise
     // If available, use the global `fetch` definition
     this.fetch = (typeof self === "object" && typeof self.fetch === "function") ? self.fetch.bind(self) : options.fetch
@@ -55,7 +58,7 @@ export default class Meed {
     if (!(typeof user === "string" && user.length > 0))
       throw new Error("User required")
 
-    const url = (this.proxy) ? `${PROXY}${BASE}/@${user}` : `${BASE}/@${user}`
+    const url = (this.proxy) ? `${this.proxy}${BASE}/@${user}` : `${BASE}/@${user}`
     return get.call(this, url, "user")
   }
 
@@ -64,7 +67,7 @@ export default class Meed {
     if (!(typeof topic === "string" && topic.length > 0))
       throw new Error("Topic required")
 
-    const url = (this.proxy) ? `${PROXY}${BASE}/topic/${topic}` : `${BASE}/topic/${topic}`
+    const url = (this.proxy) ? `${this.proxy}${BASE}/topic/${topic}` : `${BASE}/topic/${topic}`
     return get.call(this, url, "topic")
   }
 
@@ -73,7 +76,7 @@ export default class Meed {
     if (!(typeof tag === "string" && tag.length > 0))
       throw new Error("Tag required")
 
-    const url = (this.proxy) ? `${PROXY}${BASE}/tag/${tag}` : `${BASE}/tag/${tag}`
+    const url = (this.proxy) ? `${this.proxy}${BASE}/tag/${tag}` : `${BASE}/tag/${tag}`
     return get.call(this, url, "tag")
   }
 }

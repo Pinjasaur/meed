@@ -2,11 +2,11 @@
 
 [![Travis](https://img.shields.io/travis/Pinjasaur/meed.svg)](https://travis-ci.org/Pinjasaur/meed)
 
-JavaScript library for getting Medium feeds (user, topic, or tag) as JSON.
+JavaScript library for getting Medium RSS feeds (user, topic, or tag) as JSON.
 
 ## What
 
-Get Medium feeds as JSON. Also check out [Ghosts/medium-feed][mf] because it may suit your needs better.
+Get Medium RSS feeds as JSON. Also check out [Ghosts/medium-feed][mf] because it may suit your needs better.
 
 ## Why
 
@@ -19,6 +19,8 @@ Via npm or unpkg:
 - https://unpkg.com/meed
 
 For local(host) testing in a browser, you'll probably need a CORS proxy. Here's a list: https://gist.github.com/jimmywarting/ac1be6ea0297c16c477e17f8fbe51347
+
+I"ve personally had good success with https://cors-anywhere.herokuapp.com/.
 
 ## Who
 
