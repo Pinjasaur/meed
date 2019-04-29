@@ -48,9 +48,11 @@ export default class Meed {
     if (this.proxy !== false && typeof this.proxy !== "string")
       throw new Error("Proxy must be a string")
 
-    // TODO: check for provided `fetch`, error otherwise
-    // If available, use the global `fetch` definition
+    // If available, use the global `fetch` definition (from a modern browser)
     this.fetch = (typeof self === "object" && typeof self.fetch === "function") ? self.fetch.bind(self) : options.fetch
+
+    if (typeof this.fetch !== "function")
+      throw new Error("Fetch must be a function")
   }
 
   async user (user) {
