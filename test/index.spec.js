@@ -34,19 +34,19 @@ describe("Meed", () => {
     it("rejects if no argument", async () => {
 
       const [err, user] = await to(feed.user())
-      expect(err.message).to.equal("User required")
+      expect(err.message).to.equal("User is required and must be a string")
     })
 
     it("rejects if argument is empty string", async () => {
 
       const [err, user] = await to(feed.user(""))
-      expect(err.message).to.equal("User required")
+      expect(err.message).to.equal("User is required and must be a string")
     })
 
     it("rejects if argument is not string", async () => {
 
       const [err, user] = await to(feed.user(123))
-      expect(err.message).to.equal("User required")
+      expect(err.message).to.equal("User is required and must be a string")
     })
 
     it("resolves against a known user", async () => {
@@ -59,7 +59,7 @@ describe("Meed", () => {
     it("rejects against an unknown user", async () => {
 
       const [err, user] = await to(feed.user("USER_DOES_NOT_EXIST"))
-      expect(err.message).to.equal("Response not OK")
+      expect(err.message).to.equal("Response code not OK: 404")
     })
   })
 
@@ -68,19 +68,19 @@ describe("Meed", () => {
     it("rejects if no argument", async () => {
 
       const [err, topic] = await to(feed.topic())
-      expect(err.message).to.equal("Topic required")
+      expect(err.message).to.equal("Topic is required and must be a string")
     })
 
     it("rejects if argument is empty string", async () => {
 
       const [err, topic] = await to(feed.topic(""))
-      expect(err.message).to.equal("Topic required")
+      expect(err.message).to.equal("Topic is required and must be a string")
     })
 
     it("rejects if argument is not string", async () => {
 
       const [err, topic] = await to(feed.topic(123))
-      expect(err.message).to.equal("Topic required")
+      expect(err.message).to.equal("Topic is required and must be a string")
     })
 
     it("resolves against a known topic", async () => {
@@ -93,7 +93,7 @@ describe("Meed", () => {
     it("rejects against an unknown topic", async () => {
 
       const [err, topic] = await to(feed.topic("TOPIC_DOES_NOT_EXIST"))
-      expect(err.message).to.equal("Response not OK")
+      expect(err.message).to.equal("Response code not OK: 404")
     })
   })
 
@@ -102,19 +102,19 @@ describe("Meed", () => {
     it("rejects if no argument", async () => {
 
       const [err, tag] = await to(feed.tag())
-      expect(err.message).to.equal("Tag required")
+      expect(err.message).to.equal("Tag is required and must be a string")
     })
 
     it("rejects if argument is empty string", async () => {
 
       const [err, tag] = await to(feed.tag(""))
-      expect(err.message).to.equal("Tag required")
+      expect(err.message).to.equal("Tag is required and must be a string")
     })
 
     it("rejects if argument is not string", async () => {
 
       const [err, tag] = await to(feed.tag(123))
-      expect(err.message).to.equal("Tag required")
+      expect(err.message).to.equal("Tag is required and must be a string")
     })
 
     it("resolves against a known tag", async () => {

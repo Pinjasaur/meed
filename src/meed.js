@@ -14,14 +14,15 @@ const BASE = "https://medium.com/feed"
 
 /**
  * Check a response before passing it off.
- * @param {Response} res A Response from a `fetch` call.
+ * @param {Response} res  A Response from a `fetch` call.
+ * @param {String}   type The Content-Type to expect.
  */
-const check = (res) => {
+const check = (res, type) => {
   if (!res.ok)
-    throw new Error("Response not OK")
+    throw new Error(`Response code not OK: ${res.status}`)
 
-  if (!res.headers.get("Content-Type").toLowerCase().includes("text/xml"))
-    throw new Error("Response not XML")
+  if (!res.headers.get("Content-Type").toLowerCase().includes(type))
+    throw new Error(`Response type not ${type}: ${res.headers.get("Content-Type")}`)
 
   return res.text()
 }
@@ -63,11 +64,11 @@ const format = (json, type) => {
  * @param {String} url  The URL to request.
  * @param {String} type The type of feed: user|topic|tags.
  */
-const get = function (url, type) {
+const get = function (url, feedType, contentType) {
   return this.fetch(url)
-    .then(res  => check(res))
+    .then(res  => check(res, contentType))
     .then(rss  => parse(rss))
-    .then(json => format(json, type))
+    .then(json => format(json, feedType))
 }
 
 /**
@@ -89,13 +90,13 @@ export default class Meed {
     this.proxy = options.proxy || false
 
     if (this.proxy !== false && typeof this.proxy !== "string")
-      throw new Error("Proxy must be a string")
+      throw new TypeError("Proxy must be a string")
 
     // If available, use the global `fetch` definition (from a modern browser)
     this.fetch = (typeof self === "object" && typeof self.fetch === "function") ? self.fetch.bind(self) : options.fetch
 
     if (typeof this.fetch !== "function")
-      throw new Error("Fetch must be a function")
+      throw new TypeError("Fetch is required and must be a function")
   }
 
   /**
@@ -105,23 +106,23 @@ export default class Meed {
   async user (user) {
 
     if (!(typeof user === "string" && user.length > 0))
-      throw new Error("User required")
+      throw new TypeError("User is required and must be a string")
 
     const url = (this.proxy) ? `${this.proxy}${BASE}/@${user}` : `${BASE}/@${user}`
-    return get.call(this, url, "user")
+    return get.call(this, url, "user", "text/xml")
   }
 
   /**
    * Get the feed for a topic.
-   * @param {String} topic The topic (medium.com/topics).
+   * @param {String} topic The topic (medium.com/topics or Meed#topics()).
    */
   async topic (topic) {
 
     if (!(typeof topic === "string" && topic.length > 0))
-      throw new Error("Topic required")
+      throw new TypeError("Topic is required and must be a string")
 
     const url = (this.proxy) ? `${this.proxy}${BASE}/topic/${topic}` : `${BASE}/topic/${topic}`
-    return get.call(this, url, "topic")
+    return get.call(this, url, "topic", "text/xml")
   }
 
   /**
@@ -131,9 +132,9 @@ export default class Meed {
   async tag (tag) {
 
     if (!(typeof tag === "string" && tag.length > 0))
-      throw new Error("Tag required")
+      throw new TypeError("Tag is required and must be a string")
 
     const url = (this.proxy) ? `${this.proxy}${BASE}/tag/${tag}` : `${BASE}/tag/${tag}`
-    return get.call(this, url, "tag")
+    return get.call(this, url, "tag", "text/xml")
   }
 }
