@@ -4,11 +4,11 @@
 
 [![Travis](https://img.shields.io/travis/Pinjasaur/meed.svg)](https://travis-ci.org/Pinjasaur/meed)
 
-Modern JS library for getting Medium RSS feeds (user, topic, or tag) as JSON. 
-Targets modern browsers / Node.js with an API that utilizes [`fetch`][fetch]
-along with [`async` / `await`][async].
+Modern JS library for getting Medium RSS feeds (user, publcation, topic, or tag)
+as JSON. Targets modern browsers / Node.js with an API that utilizes
+[`fetch`][fetch] along with [`async` / `await`][async].
 
-Check out the [docs][docs].
+Check out the [Meed docs][docs] for details.
 
 ## What
 
@@ -21,7 +21,12 @@ Because [@Ghosts](https://github.com/Ghosts) was writing [medium-feed][mf]. ¯\\
 
 ## How
 
-Check out the [docs][docs] for more.
+Medium provides basic docs regarding the RSS feeds: https://help.medium.com/hc/en-us/articles/214874118-RSS-feeds
+You can get feeds for a user, publication, topic, or tag. Topics can be found at
+https://medium.com/topics or via `Meed#topics()`. In general, feeds seem to be
+limited to 10 items.
+
+Check out the [Meed docs][docs] for more.
 
 ### Install
 
@@ -61,7 +66,7 @@ new Meed({ proxy: "PROXY_URL" })
 
 I've had good luck with https://cors-anywhere.herokuapp.com/.
 
-Check out the [docs][docs] for more details.
+Check out the [Meed docs][docs] for more details.
 
 ## Who
 

@@ -72,11 +72,6 @@ const get = function (url, feedType, contentType) {
 }
 
 /**
- * Docs: https://help.medium.com/hc/en-us/articles/214874118-RSS-feeds
- * TODO: Meed#topics() all topics from: medium.com/topics
- * TODO: Meed#publication() w/ support for _optional_ tag
- */
-/**
  * Meed itself.
  */
 export default class Meed {
@@ -143,6 +138,10 @@ export default class Meed {
     const url = (this.proxy) ? `${this.proxy}${BASE}/topic/${topic}` : `${BASE}/topic/${topic}`
     return get.call(this, url, "topic", "text/xml")
   }
+
+  /**
+  * TODO: Meed#topics() all topics from: medium.com/topics
+  */
 
   /**
    * Get the feed for a tag.
