@@ -11,7 +11,7 @@
     "build": "webpack",
     "build-debug": "webpack --progress --colors --profile --display-modules --display-reasons --display-error-details",
     "watch": "webpack --watch",
-    "test": "mocha \"./test/*.spec.js\""
+    "test": "mocha \"./src/*.spec.js\""
   },
   "dependencies": {
     "rss-parser": "^3.7.0"
