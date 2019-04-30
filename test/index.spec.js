@@ -31,19 +31,19 @@ describe("Meed", () => {
 
   describe("#user()", () => {
 
-    it("rejects if no argument", async () => {
+    it("rejects if no user", async () => {
 
       const [err, user] = await to(feed.user())
       expect(err.message).to.equal("User is required and must be a string")
     })
 
-    it("rejects if argument is empty string", async () => {
+    it("rejects if user is empty string", async () => {
 
       const [err, user] = await to(feed.user(""))
       expect(err.message).to.equal("User is required and must be a string")
     })
 
-    it("rejects if argument is not string", async () => {
+    it("rejects if user is not string", async () => {
 
       const [err, user] = await to(feed.user(123))
       expect(err.message).to.equal("User is required and must be a string")
@@ -63,21 +63,67 @@ describe("Meed", () => {
     })
   })
 
+  describe("#publication()", () => {
+
+    it("rejects if no publication", async () => {
+
+      const [err, publication] = await to(feed.publication())
+      expect(err.message).to.equal("Publication is required and must be a string")
+    })
+
+    it("rejects if publication is empty string", async () => {
+
+      const [err, publication] = await to(feed.publication(""))
+      expect(err.message).to.equal("Publication is required and must be a string")
+    })
+
+    it("rejects if publication is not string", async () => {
+
+      const [err, publication] = await to(feed.publication(123))
+      expect(err.message).to.equal("Publication is required and must be a string")
+    })
+
+    it("rejects if tag is empty string", async () => {
+
+      const [err, publication] = await to(feed.publication("the-story", ""))
+      expect(err.message).to.equal("Tag must be a string")
+    })
+
+    it("rejects if tag is not string", async () => {
+
+      const [err, publication] = await to(feed.publication("the-story", 123))
+      expect(err.message).to.equal("Tag must be a string")
+    })
+
+    it("resolves against a known publication", async () => {
+
+      const [err, publication] = await to(feed.publication("the-story"))
+      expect(typeof publication).to.equal("object")
+      expect(publication.length).to.be.greaterThan(0)
+    })
+
+    it("rejects against an unknown publication", async () => {
+
+      const [err, publication] = await to(feed.publication("PUBLICATION_DOES_NOT_EXIST"))
+      expect(err.message).to.equal("Response code not OK: 404")
+    })
+  })
+
   describe("#topic()", () => {
 
-    it("rejects if no argument", async () => {
+    it("rejects if no topic", async () => {
 
       const [err, topic] = await to(feed.topic())
       expect(err.message).to.equal("Topic is required and must be a string")
     })
 
-    it("rejects if argument is empty string", async () => {
+    it("rejects if topic is empty string", async () => {
 
       const [err, topic] = await to(feed.topic(""))
       expect(err.message).to.equal("Topic is required and must be a string")
     })
 
-    it("rejects if argument is not string", async () => {
+    it("rejects if topic is not string", async () => {
 
       const [err, topic] = await to(feed.topic(123))
       expect(err.message).to.equal("Topic is required and must be a string")
@@ -99,19 +145,19 @@ describe("Meed", () => {
 
   describe("#tag()", () => {
 
-    it("rejects if no argument", async () => {
+    it("rejects if no tag", async () => {
 
       const [err, tag] = await to(feed.tag())
       expect(err.message).to.equal("Tag is required and must be a string")
     })
 
-    it("rejects if argument is empty string", async () => {
+    it("rejects if tag is empty string", async () => {
 
       const [err, tag] = await to(feed.tag(""))
       expect(err.message).to.equal("Tag is required and must be a string")
     })
 
-    it("rejects if argument is not string", async () => {
+    it("rejects if tag is not string", async () => {
 
       const [err, tag] = await to(feed.tag(123))
       expect(err.message).to.equal("Tag is required and must be a string")

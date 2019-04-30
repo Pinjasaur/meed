@@ -39,7 +39,7 @@ const parse  = (rss) => new RSSParser().parseString(rss)
  * @param {String} type The type of feed: user|topic|tags.
  */
 const format = (json, type) => {
-  const ctag = (["user"].includes(type)) ? "content:encoded" : "description"
+  const ctag = (["user", "publication"].includes(type)) ? "content:encoded" : "description"
   return json.items.map(item => {
     return {
       date: new Date(item.isoDate),                                             // Date
@@ -59,10 +59,10 @@ const format = (json, type) => {
 }
 
 /**
- * Make a request for an RSS feed.
+ * Make a request for a feed.
  * Note the non-arrow to avoid lexical binding of `this` (it gets .call()'d)
  * @param {String} url  The URL to request.
- * @param {String} type The type of feed: user|topic|tags.
+ * @param {String} type The type of feed: user|publication|topic|tags.
  */
 const get = function (url, feedType, contentType) {
   return this.fetch(url)
@@ -110,6 +110,25 @@ export default class Meed {
 
     const url = (this.proxy) ? `${this.proxy}${BASE}/@${user}` : `${BASE}/@${user}`
     return get.call(this, url, "user", "text/xml")
+  }
+
+  /**
+   * Get a publication's feed (with an optional tag).
+   * @param {String} publication The publication.
+   * @param {String} tag         The (optional) tag.
+   */
+  async publication (publication, tag) {
+
+    if (!(typeof publication === "string" && publication.length > 0))
+      throw new TypeError("Publication is required and must be a string")
+
+    if (tag !== undefined && !(typeof tag === "string" && tag.length > 0))
+      throw new TypeError("Tag must be a string")
+
+    let url = (this.proxy) ? `${this.proxy}${BASE}/${publication}` : `${BASE}/${publication}`
+    if (tag !== undefined)
+      url += `/tagged/${tag}`
+    return get.call(this, url, "publication", "text/xml")
   }
 
   /**
