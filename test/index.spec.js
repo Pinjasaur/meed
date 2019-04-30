@@ -143,6 +143,16 @@ describe("Meed", () => {
     })
   })
 
+  describe("#topics()", () => {
+
+    it("gets topics", async () => {
+
+      const [err, topics] = await to(feed.topics())
+      expect(typeof topics).to.equal("object")
+      expect(topics.length).to.be.greaterThan(0)
+    })
+  })
+
   describe("#tag()", () => {
 
     it("rejects if no tag", async () => {

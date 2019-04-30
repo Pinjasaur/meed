@@ -6,7 +6,8 @@ const RSSParser = require("rss-parser")
 /**
  * Constants.
  */
-const BASE = "https://medium.com/feed"
+const BASE = "https://medium.com"
+const CDN  = "https://cdn-images-1.medium.com"
 
 /**
  * Functions.
@@ -31,14 +32,21 @@ const check = (res, type) => {
  * Parse a string as RSS.
  * @param {String} rss The RSS, as a string.
  */
-const parse  = (rss) => new RSSParser().parseString(rss)
+const parseRSS = (rss) => new RSSParser().parseString(rss)
 
 /**
- * Format the JSON feed.
+ * Parse a topics string as JSON.
+ * @param {String} json   The topics JSON, as a string.
+ * @param {Number} offset Offset to trim before parsing.
+ */
+const parseTopics = (json, offset = 16) => JSON.parse(json.slice(offset))
+
+/**
+ * Format the RSS topic feed.
  * @param {Object} json The JSON, as an object.
  * @param {String} type The type of feed: user|topic|tags.
  */
-const format = (json, type) => {
+const formatRSS = (json, type) => {
   const ctag = (["user", "publication"].includes(type)) ? "content:encoded" : "description"
   return json.items.map(item => {
     return {
@@ -59,16 +67,49 @@ const format = (json, type) => {
 }
 
 /**
- * Make a request for a feed.
- * Note the non-arrow to avoid lexical binding of `this` (it gets .call()'d)
- * @param {String} url  The URL to request.
- * @param {String} type The type of feed: user|publication|topic|tags.
+ * Format the JSON topics feed.
+ * @param {Object} json The JSON, as an object.
  */
-const get = function (url, feedType, contentType) {
+const formatTopics = (json) => {
+  if (!json.success && !json.payload.references.Topic)
+    throw new Error("Invalid topics JSON")
+
+  return Object.entries(json.payload.references.Topic).map(topic => {
+    return {
+      slug: topic[1].slug,                                                      // String
+      link: `${BASE}/topic/${topic[1].slug}`,                                   // String (URL)
+      name: topic[1].name,                                                      // String
+      description: topic[1].description,                                        // String
+      image: `${CDN}/${topic[1].image.id}`                                      // String (URL)
+    }
+  })
+}
+
+/**
+ * Make a request for an RSS feed.
+ * Note the non-arrow to avoid lexical binding of `this` (it gets .call()'d)
+ * @param {String} url         The URL to request.
+ * @param {String} feedType    The type of feed: user|publication|topic|tags.
+ * @param {String} contentType The content-type expected of the response.
+ */
+const getRSS = function (url, feedType, contentType) {
   return this.fetch(url)
     .then(res  => check(res, contentType))
-    .then(rss  => parse(rss))
-    .then(json => format(json, feedType))
+    .then(rss  => parseRSS(rss))
+    .then(json => formatRSS(json, feedType))
+}
+
+/**
+ * Make a request for a topics JSON feed.
+ * Note the non-arrow to avoid lexical binding of `this` (it gets .call()'d)
+ * @param {String} url         The URL to request.
+ * @param {String} contentType The content-type expected of the response.
+ */
+const getTopics = function (url, contentType) {
+  return this.fetch(url)
+    .then(res  => check(res, contentType))
+    .then(json => parseTopics(json))
+    .then(json => formatTopics(json))
 }
 
 /**
@@ -103,8 +144,8 @@ export default class Meed {
     if (!(typeof user === "string" && user.length > 0))
       throw new TypeError("User is required and must be a string")
 
-    const url = (this.proxy) ? `${this.proxy}${BASE}/@${user}` : `${BASE}/@${user}`
-    return get.call(this, url, "user", "text/xml")
+    const url = (this.proxy) ? `${this.proxy}${BASE}/feed/@${user}` : `${BASE}/feed/@${user}`
+    return getRSS.call(this, url, "user", "text/xml")
   }
 
   /**
@@ -120,10 +161,10 @@ export default class Meed {
     if (tag !== undefined && !(typeof tag === "string" && tag.length > 0))
       throw new TypeError("Tag must be a string")
 
-    let url = (this.proxy) ? `${this.proxy}${BASE}/${publication}` : `${BASE}/${publication}`
+    let url = (this.proxy) ? `${this.proxy}${BASE}/feed/${publication}` : `${BASE}/feed/${publication}`
     if (tag !== undefined)
       url += `/tagged/${tag}`
-    return get.call(this, url, "publication", "text/xml")
+    return getRSS.call(this, url, "publication", "text/xml")
   }
 
   /**
@@ -135,13 +176,18 @@ export default class Meed {
     if (!(typeof topic === "string" && topic.length > 0))
       throw new TypeError("Topic is required and must be a string")
 
-    const url = (this.proxy) ? `${this.proxy}${BASE}/topic/${topic}` : `${BASE}/topic/${topic}`
-    return get.call(this, url, "topic", "text/xml")
+    const url = (this.proxy) ? `${this.proxy}${BASE}/feed/topic/${topic}` : `${BASE}/feed/topic/${topic}`
+    return getRSS.call(this, url, "topic", "text/xml")
   }
 
   /**
-  * TODO: Meed#topics() all topics from: medium.com/topics
-  */
+   * Get available topics: medium.com/topics.
+   */
+  async topics () {
+
+    const url = (this.proxy) ? `${this.proxy}${BASE}/topics?format=json` : `${BASE}/topics?format=json`
+    return getTopics.call(this, url, "application/json")
+  }
 
   /**
    * Get the feed for a tag.
@@ -152,7 +198,7 @@ export default class Meed {
     if (!(typeof tag === "string" && tag.length > 0))
       throw new TypeError("Tag is required and must be a string")
 
-    const url = (this.proxy) ? `${this.proxy}${BASE}/tag/${tag}` : `${BASE}/tag/${tag}`
-    return get.call(this, url, "tag", "text/xml")
+    const url = (this.proxy) ? `${this.proxy}${BASE}/feed/tag/${tag}` : `${BASE}/feed/tag/${tag}`
+    return getRSS.call(this, url, "tag", "text/xml")
   }
 }
