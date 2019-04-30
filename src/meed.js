@@ -44,7 +44,7 @@ const parseTopics = (json, offset = 16) => JSON.parse(json.slice(offset))
 /**
  * Format the RSS topic feed.
  * @param {Object} json The JSON, as an object.
- * @param {String} type The type of feed: user|topic|tags.
+ * @param {String} type The type of feed: user|publication|topic|tag.
  */
 const formatRSS = (json, type) => {
   const ctag = (["user", "publication"].includes(type)) ? "content:encoded" : "description"
@@ -71,7 +71,7 @@ const formatRSS = (json, type) => {
  * @param {Object} json The JSON, as an object.
  */
 const formatTopics = (json) => {
-  if (!json.success && !json.payload.references.Topic)
+  if (!json.success || !json.payload.references.Topic)
     throw new Error("Invalid topics JSON")
 
   return Object.entries(json.payload.references.Topic).map(topic => {
@@ -89,7 +89,7 @@ const formatTopics = (json) => {
  * Make a request for an RSS feed.
  * Note the non-arrow to avoid lexical binding of `this` (it gets .call()'d)
  * @param {String} url         The URL to request.
- * @param {String} feedType    The type of feed: user|publication|topic|tags.
+ * @param {String} feedType    The type of feed: user|publication|topic|tag.
  * @param {String} contentType The content-type expected of the response.
  */
 const getRSS = function (url, feedType, contentType) {
