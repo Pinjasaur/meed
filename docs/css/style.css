@@ -26,7 +26,7 @@
    -------------------------------------------------------------------------- */
 html {
   /* From CSS-Tricks: https://css-tricks.com/snippets/css/fluid-typography/ */
-  font-size: calc(16px + (22 - 16) * ((100vw - 300px) / (1440 - 300)));
+  font-size: calc(14px + (22 - 14) * ((100vw - 300px) / (1600 - 300)));
 }
 
 body {
@@ -44,6 +44,23 @@ a:hover {
   padding: .1em .2em;
   border: 1px solid #c4c4c4;
   color: var(--accent);
+  border-radius: .3em;
+  font-size: smaller;
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: Inconsolata, Consolas, Monaco, monospace;
+}
+
+p {
+ hyphens: auto;
+ hyphenate-limit-chars: 6 3 3;
+ hyphenate-limit-lines: 2;
+ hyphenate-limit-last: always;
+ hyphenate-limit-zone: 8%;
 }
 
 /* Layout.
@@ -56,8 +73,18 @@ main {
 }
 
   main > * + * {
-    margin-top: 2rem;
+    margin-top: 4rem;
   }
+
+li + li {
+  margin-top: .5em;
+}
+
+ol,
+ul {
+  padding-left: .5em;
+  margin-bottom: 0;
+}
 
 section > h2 {
   border-bottom: 2px solid var(--dark);
@@ -131,6 +158,10 @@ section h3 {
     .github-corner {
       display: none;
     }
+
+    .header__btn {
+      width: 85%;
+    }
   }
 
 /* Footer.
@@ -153,4 +184,43 @@ footer {
   footer small {
     font-size: 0.75rem;
     opacity: 0.25;
+  }
+
+/* Component: Pros/Cons.
+   -------------------------------------------------------------------------- */
+.compare {
+  display: flex;
+}
+
+  .compare__pros,
+  .compare__cons {
+    width: 50%;
+  }
+
+  .compare__pros ul,
+  .compare__cons ul {
+    list-style: none;
+  }
+
+  .compare__pros li::before {
+    content: "✓";
+    color: #35A00B;
+    padding-right: .5em;
+  }
+
+  .compare__cons li::before {
+    content: "✘";
+    color: #AD1313;
+    padding-right: .5em;
+  }
+
+  @media (max-width: 30rem) {
+    .compare__pros,
+    .compare__cons {
+      width: 100%;
+    }
+
+    .compare {
+      flex-wrap: wrap;
+    }
   }

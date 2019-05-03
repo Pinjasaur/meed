@@ -23,7 +23,7 @@
 
     <img class="header__logotype" src="img/logotype.svg" alt="meed">
     <p class="header__tagline">
-      Medium RSS feeds for the masses.
+      Medium RSS feeds for the&nbsp;masses.
     </p>
 
     <a href="https://raw.githubusercontent.com/Pinjasaur/meed/master/dist/meed.js" class="header__btn" download target="_blank" rel="noopener">Download &rarr;</a>
@@ -39,8 +39,65 @@
     <section>
       <h2>tl;dr</h2>
       <p>
-        Talk about Meed.
+        Meed is a JavaScript library for getting Medium RSS feeds as JSON.
+        It&rsquo;s written in JavaScript utilizing <code>fetch</code> and
+        <code>async</code> / <code>await</code> &amp; can be used in a modern
+        browser or Node.js environment. You can get the feed for any user,
+        publication, topic, or&nbsp;tag.
       </p>
+
+      <div class="compare">
+        <div class="compare__pros">
+          <h3>Features</h3>
+          <ul>
+            <li><code>fetch</code> (native or polyfilled)</li>
+            <li><code>Promise</code>-based (<code>async</code> / <code>await</code>)</li>
+            <li>Modern browsers &amp; Node.js</li>
+          </ul>
+        </div>
+
+        <div class="compare__cons">
+          <h3>Limitations</h3>
+          <ul>
+            <li>10 item RSS limit (by Medium)</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Demo</h3>
+      <p>TODO</p>
+    </section>
+
+    <section>
+      <h2>Getting Started</h2>
+      <ol>
+        <li>
+          <p>Install with npm/yarn, a CDN, or the latest release from&nbsp;GitHub.</p>
+          <pre><code>yarn add meed</code></pre>
+        </li>
+        <li>
+          <p>Add the script to your markup.</p>
+          <pre><code>&lt;script src="path/to/meed.js"&gt;&lt;/script&gt;</code></pre>
+          <p>Or, to your Node.js environment.</p>
+          <pre><code>const Meed = require("meed")</code></pre>
+        </li>
+        <li>
+          <p>Create a new instance.</p>
+          <pre><code>const feed = new Meed()</code></pre>
+          <p>In Node.js, bring your own <code>fetch</code>.</p>
+          <pre><code>const fetch = require("node-fetch")
+const feed = new Meed({ fetch })</code></pre>
+        </li>
+        <li>
+          <p>Grab a feed.</p>
+          <pre><code>const user = await feed.user("Medium")</code></pre>
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>API</h2>
+      <p>TODO</p>
     </section>
 
   </main>
@@ -52,7 +109,7 @@
     </p>
 
     <small>
-      Don&apos;t drink &amp; derive.
+      Don&rsquo;t drink &amp; derive.
     </small>
 
   </footer>
