@@ -1,9 +1,17 @@
+@charset "utf-8";
+
+/* @imports.
+   -------------------------------------------------------------------------- */
+@import "https://unpkg.com/modern-normalize@^0.5.0/modern-normalize.css";
+@import "https://fonts.googleapis.com/css?family=Gothic+A1:400,900|Inconsolata";
+
 /* Variables.
    -------------------------------------------------------------------------- */
 :root {
   --dark: #050505;
   --light: #F7F7F7;
   --accent: #20A7F2;
+  --skew-height: 3.5vw;
 }
 
 /* Base.
@@ -24,6 +32,7 @@ html {
 body {
   font-family: Gothic A1, Helvetica Neue, Helvetica, Arial, sans-serif;
   line-height: 1.4;
+  background-color: var(--light);
 }
 
 a:hover {
@@ -70,6 +79,22 @@ section h3 {
   color: var(--dark);
   text-align: center;
   padding: 2em 1em 2em;
+}
+
+@supports (clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--skew-height)), 0 100%)) {
+  .header {
+    padding: 2em 1em calc(2em + var(--skew-height));
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - var(--skew-height)),
+      0 100%
+    );
+  }
+
+  main {
+    margin-top: calc(var(--skew-height) * -1);
+  }
 }
 
   .header__logotype {

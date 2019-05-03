@@ -1,14 +1,20 @@
 <!doctype html>
 <html lang="en-US">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <title>Meed &mdash; Medium RSS feeds for the masses</title>
 
-  <link rel="stylesheet" href="https://unpkg.com/modern-normalize@^0.5.0/modern-normalize.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gothic+A1:400,900|Inconsolata">
+  <!-- CSS @imports -->
+  <link rel="preload" href="https://unpkg.com/modern-normalize@^0.5.0/modern-normalize.css" as="style">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Gothic+A1:400,900|Inconsolata" as="style">
+
+  <!-- Main stylesheets & scripts -->
+  <link rel="preload" href="css/style.css" as="style">
+  <link rel="preload" href="js/script.js" as="script">
+
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
