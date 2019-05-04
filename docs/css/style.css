@@ -40,18 +40,6 @@ a:hover {
   text-decoration: none;
 }
 
-/* pre {
-  overflow-x: auto;
-  line-height: 1.45;
-  margin-bottom: 1.5em;
-  padding: .5em 1em;
-}
-
-pre,
-pre > code {
-  font-size: 1em;
-} */
-
 .hljs {
   background-color: #fcfcfc;
   border-radius: 3px;
@@ -129,22 +117,6 @@ section h3 {
   padding: 2em 1em 2em;
 }
 
-@supports (clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--skew-height)), 0 100%)) {
-  .header {
-    padding: 2em 1em calc(2em + var(--skew-height));
-    clip-path: polygon(
-      0 0,
-      100% 0,
-      100% calc(100% - var(--skew-height)),
-      0 100%
-    );
-  }
-
-  main {
-    margin-top: calc(var(--skew-height) * -1);
-  }
-}
-
   .header__logotype {
     max-width: 100%;
     width: 20rem;
@@ -155,7 +127,6 @@ section h3 {
     font-size: 1.5em;
     margin: 0;
     padding: 1em 0 2em;
-    /* font-weight: 900; */
   }
 
   .header__btn {
@@ -187,22 +158,22 @@ section h3 {
 
 /* Footer.
    -------------------------------------------------------------------------- */
-footer {
+.footer {
   background-color: #1f1f1f;
   color: var(--light);
   text-align: center;
-  padding: 3rem 0 4rem;
+  padding: 3em 1em 4em;
 }
 
-  footer a {
+  .footer a {
     color: var(--light);
   }
 
-  footer a:hover {
+  .footer a:hover {
     color: #ababab;
   }
 
-  footer small {
+  .footer small {
     font-size: 0.75rem;
     opacity: 0.25;
   }
@@ -246,3 +217,41 @@ footer {
       flex-wrap: wrap;
     }
   }
+
+/* Enhancement: Polygon Shapes/Masking.
+   -------------------------------------------------------------------------- */
+@supports (clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--skew-height)), 0 100%)) {
+  .header {
+    padding: 2em 1em calc(2em + var(--skew-height));
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - var(--skew-height)),
+      0 100%
+    );
+  }
+
+  .footer {
+    padding: calc(3em + var(--skew-height)) 1em 4em;
+    /* Pointing down */
+    clip-path: polygon(
+      0 0,
+      50% calc(0% + var(--skew-height)),
+      100% 0,
+      100% 100%,
+      0 100%
+    );
+    /* Pointing up */
+    /* clip-path: polygon(
+      0 calc(0% + var(--skew-height)),
+      50% 0,
+      100% calc(0% + var(--skew-height)),
+      100% 100%,
+      0 100%
+    ); */
+  }
+
+  main {
+    margin-top: calc(var(--skew-height) * -1);
+  }
+}
