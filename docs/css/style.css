@@ -26,7 +26,8 @@
    -------------------------------------------------------------------------- */
 html {
   /* From CSS-Tricks: https://css-tricks.com/snippets/css/fluid-typography/ */
-  font-size: calc(14px + (22 - 14) * ((100vw - 300px) / (1600 - 300)));
+  /* Have root font sizes scale from 14-22px through 400-1600px viewport */
+  font-size: calc(14px + (22 - 14) * ((100vw - 400px) / (1600 - 400)));
 }
 
 body {
@@ -39,12 +40,32 @@ a:hover {
   text-decoration: none;
 }
 
+/* pre {
+  overflow-x: auto;
+  line-height: 1.45;
+  margin-bottom: 1.5em;
+  padding: .5em 1em;
+}
+
+pre,
+pre > code {
+  font-size: 1em;
+} */
+
+.hljs {
+  background-color: #fcfcfc;
+  border-radius: 3px;
+  padding: .75em 1em;
+  border: 1px solid #ccc;
+}
+
 :not(pre) > code {
   display: inline-block;
   padding: .1em .2em;
-  border: 1px solid #c4c4c4;
+  background-color: #fcfcfc;
+  border: 1px solid #ccc;
   color: var(--accent);
-  border-radius: .3em;
+  border-radius: 3px;
   font-size: smaller;
 }
 
@@ -82,7 +103,7 @@ li + li {
 
 ol,
 ul {
-  padding-left: .5em;
+  padding-left: 1em;
   margin-bottom: 0;
 }
 
@@ -200,6 +221,7 @@ footer {
   .compare__pros ul,
   .compare__cons ul {
     list-style: none;
+    padding-left: .5em;
   }
 
   .compare__pros li::before {

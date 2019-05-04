@@ -7,14 +7,20 @@
 
   <title>Meed &mdash; Medium RSS feeds for the masses</title>
 
-  <!-- CSS @imports -->
+  <!-- Third party stylesheets -->
   <link rel="preload" href="https://unpkg.com/modern-normalize@^0.5.0/modern-normalize.css" as="style">
   <link rel="preload" href="https://fonts.googleapis.com/css?family=Gothic+A1:400,900|Inconsolata" as="style">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" as="style">
+
+  <!-- Third party scripts -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" as="script">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/plaintext.min.js" as="script">
 
   <!-- Main stylesheets & scripts -->
   <link rel="preload" href="css/style.css" as="style">
   <link rel="preload" href="js/script.js" as="script">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -72,13 +78,14 @@
       <h2>Getting Started</h2>
       <ol>
         <li>
-          <p>Install with npm/yarn, a CDN, or the latest release from&nbsp;GitHub.</p>
-          <pre><code>yarn add meed</code></pre>
+          <p>Install with yarn/npm, a CDN, or the latest release.</p>
+          <pre class="lang-bash"><code>yarn add meed # yarn
+npm install meed # npm</code></pre>
         </li>
         <li>
           <p>Add the script to your markup.</p>
           <pre><code>&lt;script src="path/to/meed.js"&gt;&lt;/script&gt;</code></pre>
-          <p>Or, to your Node.js environment.</p>
+          <p>Or to your Node.js environment.</p>
           <pre><code>const Meed = require("meed")</code></pre>
         </li>
         <li>
@@ -114,5 +121,8 @@ const feed = new Meed({ fetch })</code></pre>
 
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/plaintext.min.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>
