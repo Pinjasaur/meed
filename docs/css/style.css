@@ -270,6 +270,31 @@ h4 + h5 {
   }
 }
 
+/* Component: External Link URL Display.
+   -------------------------------------------------------------------------- */
+main a[href*="//"]:not([href*="pinjasaur.github.io/templater.js/"]):not([href*="meed.js.org/"]) {
+  position: relative;
+}
+
+  main a[href*="//"]:not([href*="pinjasaur.github.io/templater.js/"]):not([href*="meed.js.org/"])::after {
+    display: none;
+    content: attr(href);
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + .2em);
+    padding: .1em .2em;
+    background-color: var(--accent);
+    opacity: .95;
+    font-size: .8em;
+    color: var(--light);
+    white-space: nowrap;
+  }
+
+  main a[href*="//"]:not([href*="pinjasaur.github.io/templater.js/"]):not([href*="meed.js.org/"]):hover::after {
+    display: block;
+  }
+
+
 /* Enhancement: Polygon Shapes/Masking.
    -------------------------------------------------------------------------- */
 @supports (clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--skew-height)), 0 100%)) {
