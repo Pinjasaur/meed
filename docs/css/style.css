@@ -239,6 +239,17 @@ h4 + h5 {
     }
   }
 
+/* Component: Header Hash Link.
+   -------------------------------------------------------------------------- */
+.header-hash {
+  text-decoration: none;
+  opacity: .35;
+}
+
+.header-hash:hover {
+  opacity: 1;
+}
+
 /* Enhancement: Polygon Shapes/Masking.
    -------------------------------------------------------------------------- */
 @supports (clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--skew-height)), 0 100%)) {

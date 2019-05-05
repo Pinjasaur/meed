@@ -110,7 +110,7 @@ const feed = new Meed({ fetch })</code></pre>
       <p>
         At a high level, you create a <code>new Meed</code> instance and then
         call one of the methods. A &ldquo;feed&rdquo; refers to an array of
-        <a href="#0">formatted objects</a>.
+        <a href="#feed-formats">formatted objects</a>.
       </p>
       <p>
         Error handling for the <code>await</code> calls is left up to the
@@ -142,7 +142,7 @@ const feed = new Meed({ fetch })</code></pre>
         modern browser).
       </p>
 
-      <h3>#user(user)</h3>
+      <h3>user(user)</h3>
       <h5>user</h5>
       <p>
         <em>Required</em><br>
@@ -151,7 +151,7 @@ const feed = new Meed({ fetch })</code></pre>
         Returns the feed for a <code>user</code>.
       </p>
 
-      <h3>#publication(publication, [tag])</h3>
+      <h3>publication(publication, [tag])</h3>
       <h5>publication</h5>
       <p>
         <em>Required</em><br>
@@ -165,7 +165,7 @@ const feed = new Meed({ fetch })</code></pre>
         <code>tag</code>.
       </p>
 
-      <h3>#topic(topic)</h3>
+      <h3>topic(topic)</h3>
       <h5>topic</h5>
       <p>
         <em>Required</em><br>
@@ -174,13 +174,13 @@ const feed = new Meed({ fetch })</code></pre>
         Returns the feed for a <code>topic</code>.
       </p>
 
-      <h3>#topics()</h3>
+      <h3>topics()</h3>
       <p>
         Returns the feed of available <code>topic</code>s. See also:
         <a href="https://medium.com/topics" target="_blank" rel="noopener">medium.com/topics</a>.
       </p>
 
-      <h3>#tag(tag)</h3>
+      <h3>tag(tag)</h3>
       <h5>tag</h5>
       <p>
         <em>Required</em><br>
@@ -189,32 +189,31 @@ const feed = new Meed({ fetch })</code></pre>
         Returns the feed for a <code>tag</code>.
       </p>
 
-      <h2>Feed Formats</h2>
+      <h2 id="feed-formats">Feed Formats</h2>
       <p>
         RSS (user, publication, topic, or tag) &amp; JSON (topics) feeds are
         parsed and returned as arrays of objects formatted as follows.
       </p>
 
-      <h3>Feed Formats</h3>
-      <h4>RSS</h4>
+      <h3>RSS</h3>
       <p>A user, publication, topic, or tag feed.</p>
       <pre class="lang-js"><code>{
   date: Date, // ISO date
   link: String, // (URL) link to article
-  guid: String, // (URL|URI)
+  guid: String, // (URL|URI) GUID
   title: String, // title of article
   author: String, // name of author (_should_ be sans email)
-  content: String, // (HTML) contents of the article
+  content: String, // (HTML) content of article
   categories: Array[String] // list of categories
 }</code></pre>
 
-      <h4>JSON</h4>
+      <h3>JSON</h3>
       <p>A topics feed.</p>
       <pre class="lang-js"><code>{
   slug: String, // slug used in link URL
   link: String, // (URL) link to topic
   name: String, // name of topic
-  image: String, // (URL) image of
+  image: String, // (URL) image of topic
   description: String // description of topic
 }</code></pre>
     </section>
