@@ -1,2 +1,4 @@
 /docs/
-/src/
+/.github/
+.editorconfig
+webpack.config.js
