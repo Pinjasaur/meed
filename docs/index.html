@@ -75,7 +75,7 @@
     </section>
 
     <section>
-      <h2>Getting Started</h2>
+      <h2>Usage</h2>
       <ol>
         <li>
           <p>Install with yarn/npm, a CDN, or the latest release.</p>
@@ -97,14 +97,146 @@ const feed = new Meed({ fetch })</code></pre>
         </li>
         <li>
           <p>Grab a feed.</p>
-          <pre><code>const user = await feed.user("Medium")</code></pre>
+          <pre><code>(async () => {
+  const user = await feed.user("Medium")
+  console.log(user)
+})()</code></pre>
         </li>
       </ol>
     </section>
 
     <section>
       <h2>API</h2>
-      <p>TODO</p>
+      <p>
+        At a high level, you create a <code>new Meed</code> instance and then
+        call one of the methods. A &ldquo;feed&rdquo; refers to an array of
+        <a href="#0">formatted objects</a>.
+      </p>
+      <p>
+        Error handling for the <code>await</code> calls is left up to the
+        author. A standard <code>try..catch</code> block will suffice or a
+        utility like <a href="https://github.com/scopsy/await-to-js" target="_blank" rel="noopener">await-to-js</a>
+        will work as well.
+      </p>
+
+      <h3>Meed([options])</h3>
+      <p>
+        Create a <code>new</code> instance, optionally passing in an
+        <code>options</code> object.
+      </p>
+      <h4>options</h4>
+      <h5>proxy</h5>
+      <p>
+        Type: <code>String</code><br>
+        Default: none<br>
+        <br>
+        CORS proxy to use for local(host). Gets prepended to the request URL.
+      </p>
+      <h5>fetch</h5>
+      <p>
+        Type: <code>Function</code><br>
+        Default: none<br>
+        <br>
+        <code>fetch</code> implementation to use (i.e. in Node.js). By default,
+        the global native implementation will be attempted to be used (i.e. in a
+        modern browser).
+      </p>
+
+      <h3>#user(user)</h3>
+      <h5>user</h5>
+      <p>
+        <em>Required</em><br>
+        Type: <code>String</code><br>
+        <br>
+        Returns the feed for a <code>user</code>.
+      </p>
+
+      <h3>#publication(publication, [tag])</h3>
+      <h5>publication</h5>
+      <p>
+        <em>Required</em><br>
+        Type: <code>String</code><br>
+      </p>
+      <h5>tag</h5>
+      <p>
+        Type: <code>String</code><br>
+        <br>
+        Returns the feed for a <code>publication</code> with an optional
+        <code>tag</code>.
+      </p>
+
+      <h3>#topic(topic)</h3>
+      <h5>topic</h5>
+      <p>
+        <em>Required</em><br>
+        Type: <code>String</code><br>
+        <br>
+        Returns the feed for a <code>topic</code>.
+      </p>
+
+      <h3>#topics()</h3>
+      <p>
+        Returns the feed of available <code>topic</code>s. See also:
+        <a href="https://medium.com/topics" target="_blank" rel="noopener">medium.com/topics</a>.
+      </p>
+
+      <h3>#tag(tag)</h3>
+      <h5>tag</h5>
+      <p>
+        <em>Required</em><br>
+        Type: <code>String</code><br>
+        <br>
+        Returns the feed for a <code>tag</code>.
+      </p>
+
+      <h2>Feed Formats</h2>
+      <p>
+        RSS (user, publication, topic, or tag) &amp; JSON (topics) feeds are
+        parsed and returned as arrays of objects formatted as follows.
+      </p>
+
+      <h3>Feed Formats</h3>
+      <h4>RSS</h4>
+      <p>A user, publication, topic, or tag feed.</p>
+      <pre class="lang-js"><code>{
+  date: Date, // ISO date
+  link: String, // (URL) link to article
+  guid: String, // (URL|URI)
+  title: String, // title of article
+  author: String, // name of author (_should_ be sans email)
+  content: String, // (HTML) contents of the article
+  categories: Array[String] // list of categories
+}</code></pre>
+
+      <h4>JSON</h4>
+      <p>A topics feed.</p>
+      <pre class="lang-js"><code>{
+  slug: String, // slug used in link URL
+  link: String, // (URL) link to topic
+  name: String, // name of topic
+  image: String, // (URL) image of
+  description: String // description of topic
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>Limitations</h2>
+      <h3>RSS Item Limits</h3>
+      <p>
+        Medium appears to enforce a 10-item limit per RSS feed with no apparent
+        pagination support.
+      </p>
+    </section>
+
+    <section>
+      <h2>Contributing</h2>
+      <p>
+        Meed itself along with this documentation is is open-source
+        (<a href="https://pinjasaur.mit-license.org/2018" target="_blank" rel="noopener">MIT licensed</a>).
+        Any feature requests, issues, questions, improvements, and so forth can
+        be made in the <a href="https://github.com/Pinjasaur/meed" target="_blank" rel="noopener">repository</a>.
+        I don&rsquo;t bite, I promise.
+      </p>
     </section>
 
   </main>

@@ -36,6 +36,10 @@ body {
   background-color: var(--light);
 }
 
+main a {
+  color: var(--dark);
+}
+
 a:hover {
   text-decoration: none;
 }
@@ -105,6 +109,23 @@ section h3 {
 }
 
   section h3 + * {
+    margin-top: .5rem;
+  }
+
+h4,
+h5 {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+h3 + h5,
+h4 + h5 {
+  margin-top: .5rem;
+  margin-bottom: 0;
+}
+
+  h3 + h5 + *,
+  h4 + h5 + * {
     margin-top: .5rem;
   }
 
