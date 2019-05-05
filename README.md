@@ -42,7 +42,11 @@ In a browser that supports [`fetch`][ciu-fetch] & [`async`/`await`][ciu-async]:
 
 ```js
 const feed = new Meed()
-const user = await feed.user("Medium")
+
+;(async () => {
+  const user = await feed.user("Medium")
+  console.log(user)
+})()
 ```
 
 or in Node.js (bring your own `fetch`):
@@ -52,7 +56,11 @@ const Meed  = require("meed")
 const fetch = require("node-fetch")
 
 const feed = new Meed({ fetch })
-const user = await feed.user("Medium")
+
+;(async () => {
+  const user = await feed.user("Medium")
+  console.log(user)
+})()
 ```
 
 ### Proxy
