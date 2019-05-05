@@ -42,7 +42,7 @@ const parseRSS = (rss) => new RSSParser().parseString(rss)
 const parseTopics = (json, offset = 16) => JSON.parse(json.slice(offset))
 
 /**
- * Format the RSS topic feed.
+ * Format the RSS feed.
  * @param {Object} json The JSON, as an object.
  * @param {String} type The type of feed: user|publication|topic|tag.
  */
@@ -79,8 +79,8 @@ const formatTopics = (json) => {
       slug: topic[1].slug,                                                      // String
       link: `${BASE}/topic/${topic[1].slug}`,                                   // String (URL)
       name: topic[1].name,                                                      // String
-      description: topic[1].description,                                        // String
-      image: `${CDN}/${topic[1].image.id}`                                      // String (URL)
+      image: `${CDN}/${topic[1].image.id}`,                                     // String (URL)
+      description: topic[1].description                                         // String
     }
   })
 }
