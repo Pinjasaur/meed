@@ -250,6 +250,26 @@ h4 + h5 {
   opacity: 1;
 }
 
+/* Component: Heart(beat).
+   -------------------------------------------------------------------------- */
+.heart {
+  color: #f00;
+  animation: heartbeat 1.5s infinite;
+  display: inline-block;
+}
+
+@keyframes heartbeat {
+  0%, 20%, 50%, 80%, 100% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.2);
+  }
+  60% {
+    transform: scale(1.1);
+  }
+}
+
 /* Enhancement: Polygon Shapes/Masking.
    -------------------------------------------------------------------------- */
 @supports (clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--skew-height)), 0 100%)) {
