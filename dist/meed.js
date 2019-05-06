@@ -1,6 +1,6 @@
 /*!
  * meed v1.0.0-beta.1 - Get Medium RSS feeds as JSON.
- * On the web at https://pinjasaur.github.io/meed/
+ * On the web at https://meed.js.org/
  * Written by Paul Esch-Laurent <p@uly.io>
  * Licensed under MIT
  */

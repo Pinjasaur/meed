@@ -5,7 +5,7 @@
   "main": "dist/meed.js",
   "repository": "Pinjasaur/meed",
   "author": "Paul Esch-Laurent <p@uly.io>",
-  "homepage": "https://pinjasaur.github.io/meed/",
+  "homepage": "https://meed.js.org/",
   "license": "MIT",
   "scripts": {
     "build": "webpack",

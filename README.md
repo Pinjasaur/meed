@@ -87,7 +87,7 @@ Check out the [Meed docs][docs] for more details.
 [MIT](https://pinjasaur.mit-license.org/2018).
 
 [mf]: https://github.com/Ghosts/medium-feed
-[docs]: https://pinjasaur.github.io/meed/
+[docs]: https://meed.js.org/
 
 [fetch]: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
 [async]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
