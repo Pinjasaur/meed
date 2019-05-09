@@ -244,6 +244,7 @@ h4 + h5 {
 .header-hash {
   text-decoration: none;
   opacity: .35;
+  padding-right: .25em;
 }
 
 .header-hash:hover {
