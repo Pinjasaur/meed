@@ -14,8 +14,9 @@
   }
 
   const $headers = document.querySelectorAll("section h2, section h3")
+
   $headers.forEach(($header, index) => {
-    const slug  = `${slugify($header.textContent)}-${index}`
+    const slug  = $header.id || `${slugify($header.textContent)}-${index}`
     const $link = document.createElement("a")
     $link.innerHTML = "#&nbsp;"
     $link.className = "header-hash"
@@ -23,7 +24,5 @@
     $link.id = slug
     $header.insertBefore($link, $header.firstChild)
   })
-
-  // TODO: the thing.
 
 })(document, window)

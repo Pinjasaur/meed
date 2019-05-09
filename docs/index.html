@@ -49,7 +49,9 @@
         It&rsquo;s written in JavaScript utilizing <code>fetch</code> &
         <code>async</code> / <code>await</code> bundled as a UMD module so it
         can be used in a modern browser or Node.js environment. You can get the
-        feed for any user, publication, topic, or&nbsp;tag.
+        feed for any <a href="#user">user</a>,
+        <a href="#publication">publication</a>, <a href="#topic">topic</a>,
+        or&nbsp;<a href="#tag">tag</a>.
       </p>
 
       <div class="compare">
@@ -153,7 +155,7 @@ const feed = new Meed({ fetch })</code></pre>
         modern browser).
       </p>
 
-      <h3>user(user)</h3>
+      <h3 id="user">user(user)</h3>
       <h5>user</h5>
       <p>
         <em>Required</em><br>
@@ -162,7 +164,7 @@ const feed = new Meed({ fetch })</code></pre>
         Returns the feed for a <code>user</code>.
       </p>
 
-      <h3>publication(publication, [tag])</h3>
+      <h3 id="publication">publication(publication, [tag])</h3>
       <h5>publication</h5>
       <p>
         <em>Required</em><br>
@@ -176,7 +178,7 @@ const feed = new Meed({ fetch })</code></pre>
         <code>tag</code>.
       </p>
 
-      <h3>topic(topic)</h3>
+      <h3 id="topic">topic(topic)</h3>
       <h5>topic</h5>
       <p>
         <em>Required</em><br>
@@ -185,13 +187,13 @@ const feed = new Meed({ fetch })</code></pre>
         Returns the feed for a <code>topic</code>.
       </p>
 
-      <h3>topics()</h3>
+      <h3 id="topics">topics()</h3>
       <p>
         Returns the feed of available <code>topic</code>s. See also:
         <a href="https://medium.com/topics" target="_blank" rel="noopener">medium.com/topics</a>.
       </p>
 
-      <h3>tag(tag)</h3>
+      <h3 id="tag">tag(tag)</h3>
       <h5>tag</h5>
       <p>
         <em>Required</em><br>
@@ -202,12 +204,17 @@ const feed = new Meed({ fetch })</code></pre>
 
       <h2 id="feed-formats">Feed Formats</h2>
       <p>
-        RSS (user, publication, topic, or tag) &amp; JSON (topics) feeds are
-        parsed and returned as arrays of objects formatted as follows.
+        RSS (<a href="#user">user</a>, <a href="#publication">publication</a>,
+        <a href="#topic">topic</a>, or <a href="#tag">tag</a>) &amp; JSON
+        (<a href="#topics">topics</a>) feeds are parsed and returned as arrays
+        of objects formatted as follows.
       </p>
 
       <h3>RSS</h3>
-      <p>A user, publication, topic, or tag feed.</p>
+      <p>
+        A <a href="#user">user</a>, <a href="#publication">publication</a>,
+        <a href="#topic">topic</a>, or <a href="#tag">tag</a> feed.
+      </p>
       <pre class="lang-js"><code>{
   date: Date, // ISO date
   link: String, // (URL) link to article
@@ -219,7 +226,7 @@ const feed = new Meed({ fetch })</code></pre>
 }</code></pre>
 
       <h3>JSON</h3>
-      <p>A topics feed.</p>
+      <p>A <a href="#topics">topics</a> feed.</p>
       <pre class="lang-js"><code>{
   slug: String, // slug used in link URL
   link: String, // (URL) link to topic
