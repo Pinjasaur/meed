@@ -1,6 +1,6 @@
 ;((document, window, undefined) => {
 
-  "use strict";
+  "use strict"
 
   hljs.initHighlightingOnLoad()
 
@@ -35,11 +35,17 @@
   for (const $header of $headers) {
     let slug = $header.id || slugify($header.textContent)
     slug = (dupes.includes(slug)) ? `${slug}-${uniq++}` : slug
+
     const $link = document.createElement("a")
     $link.innerHTML = "#"
     $link.className = "header-hash"
     $link.href = `#${slug}`
     $link.id = slug
+
+    // Remove `id` from header (avoid having duplicate `id`s)
+    if ($header.id)
+      $header.removeAttribute("id")
+
     $header.insertBefore($link, $header.firstChild)
   }
 
