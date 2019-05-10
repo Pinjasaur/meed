@@ -4,8 +4,6 @@
 
 [![Travis](https://img.shields.io/travis/Pinjasaur/meed.svg)](https://travis-ci.org/Pinjasaur/meed)
 
-**Currently in a pre-release _beta_ stage. Will hit v1 soon.**
-
 Modern JS library for getting Medium RSS feeds (user, publcation, topic, or tag)
 as JSON. Targets modern browsers / Node.js with an API that utilizes
 [`fetch`][fetch] along with [`async` / `await`][async].
