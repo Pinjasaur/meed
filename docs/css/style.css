@@ -160,12 +160,37 @@ h4 + h5 {
     margin: 1em;
     display: inline-block;
     min-width: 15rem;
+    position: relative;
+    overflow: hidden;
   }
 
-  .header__btn:hover {
-    background: var(--dark);
-    color: var(--accent);
+  .header__btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--dark);
+    transform: rotate(-45deg) translate(calc(100% - .75em), calc(100% - .75em));
+    transform-origin: 100% 100%;
+    transition: transform .2s ease-out;
   }
+
+  .header__btn:hover::before {
+    transition: transform .2s ease-in;
+    transform: rotate(-45deg) translate(calc(100% - .5em), calc(100% - .5em));
+  }
+
+    .header__btn span {
+      display: inline-block;
+      transition: transform .2s ease-out;
+    }
+
+    .header__btn:hover span {
+      transition: transform .2s ease-in;
+      transform: translateX(.25em);
+    }
 
   @media (max-width: 30rem) {
     .github-corner {
