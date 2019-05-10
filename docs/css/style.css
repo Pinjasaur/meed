@@ -310,11 +310,11 @@ h4 + h5 {
 
 /* Component: External Link URL Display.
    -------------------------------------------------------------------------- */
-main a[href*="//"]:not([href*="pinjasaur.github.io/templater.js/"]):not([href*="meed.js.org/"]) {
+main a[href*="//"]:not([href*="meed.js.org/"]) {
   position: relative;
 }
 
-  main a[href*="//"]:not([href*="pinjasaur.github.io/templater.js/"]):not([href*="meed.js.org/"])::after {
+  main a[href*="//"]:not([href*="meed.js.org/"])::after {
     display: none;
     content: attr(href);
     position: absolute;
@@ -328,7 +328,7 @@ main a[href*="//"]:not([href*="pinjasaur.github.io/templater.js/"]):not([href*="
     white-space: nowrap;
   }
 
-  main a[href*="//"]:not([href*="pinjasaur.github.io/templater.js/"]):not([href*="meed.js.org/"]):hover::after {
+  main a[href*="//"]:not([href*="meed.js.org/"]):hover::after {
     display: block;
   }
 
