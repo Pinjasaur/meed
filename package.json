@@ -1,6 +1,6 @@
 {
   "name": "meed",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Get Medium RSS feeds as JSON.",
   "main": "dist/meed.js",
   "repository": "Pinjasaur/meed",
