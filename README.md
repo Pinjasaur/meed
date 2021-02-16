@@ -72,7 +72,7 @@ You can use one like so:
 new Meed({ proxy: "PROXY_URL" })
 ```
 
-I've had good luck with https://cors-anywhere.herokuapp.com/.
+I've had good luck with ~~https://cors-anywhere.herokuapp.com/~~ https://cors.bridged.cc/.
 
 Check out the [Meed docs][docs] for more details.
 
