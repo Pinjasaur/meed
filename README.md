@@ -22,8 +22,8 @@ Because [@Ghosts](https://github.com/Ghosts) was writing [medium-feed][mf]. ¯\\
 ## How
 
 Medium provides basic docs regarding the RSS feeds: https://help.medium.com/hc/en-us/articles/214874118-RSS-feeds
-You can get feeds for a user, publication, topic, or tag. Topics can be found at
-https://medium.com/topics or via `Meed#topics()`. In general, feeds seem to be
+You can get feeds for a user, publication, or tag/topic. ~~Tags/topics can be found at
+https://medium.com/topics or via `Meed#topics()`.~~ In general, feeds seem to be
 limited to 10 items.
 
 Check out the [Meed docs][docs] for more.
