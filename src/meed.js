@@ -10,6 +10,12 @@ const BASE = "https://medium.com"
 const CDN  = "https://cdn-images-1.medium.com"
 
 /**
+ * Globals.
+ */
+const pkg = require("../package.json")
+const ua = `${pkg.name}/${pkg.version} (${pkg.homepage})`
+
+/**
  * Functions.
  */
 
@@ -20,7 +26,7 @@ const CDN  = "https://cdn-images-1.medium.com"
  */
 const check = (res, type) => {
   if (!res.ok)
-    throw new Error(`Response code not OK: ${res.status}`)
+    throw new Error(`Response code not OK: ${res.status} (${res.statusText})`)
 
   if (!res.headers.get("Content-Type").toLowerCase().includes(type))
     throw new Error(`Response type not ${type}: ${res.headers.get("Content-Type")}`)
@@ -93,7 +99,7 @@ const formatTopics = (json) => {
  * @param {String} contentType The content-type expected of the response.
  */
 const getRSS = function (url, feedType, contentType) {
-  return this.fetch(url)
+  return this.fetch(url, { headers: { 'User-Agent': ua }})
     .then(res  => check(res, contentType))
     .then(rss  => parseRSS(rss))
     .then(json => formatRSS(json, feedType))
@@ -106,7 +112,7 @@ const getRSS = function (url, feedType, contentType) {
  * @param {String} contentType The content-type expected of the response.
  */
 const getTopics = function (url, contentType) {
-  return this.fetch(url)
+  return this.fetch(url, { headers: { 'User-Agent': ua } })
     .then(res  => check(res, contentType))
     .then(json => parseTopics(json))
     .then(json => formatTopics(json))
